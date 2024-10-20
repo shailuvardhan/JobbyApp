@@ -1,0 +1,64 @@
+.jobs-loader-container {
+  height: 90vh;
+  background-color: #000000;
+  background-size: cover;
+}
+.job-card-details-container {
+  height: 90%;
+  background-color: #000000;
+  background-size: cover;
+  padding: 20px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+.Main-card {
+  height: 50%;
+  background-color: #272727;
+  margin: 20px;
+  border-radius: 10px;
+  padding: 20px;
+}
+.list-container {
+  padding-left: 0;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.life-at-company-container {
+  display: flex;
+}
+.card-description {
+  padding-right: 10px;
+}
+.life-at-company-img {
+  width: fit-content;
+}
+.description-visit-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.visit-container {
+  display: flex;
+  align-items: center;
+}
+.visit-heading {
+  color: #6a95ce;
+  font-size: 14px;
+  font-family: 'Roboto';
+  text-decoration: none;
+  padding-right: 4px;
+}
+.visit-icon {
+  color: #6a95ce;
+  font-size: 14px;
+  font-family: 'Roboto';
+}
+.hr-line {
+  border-color: #6a95ce;
+  width: 100%;
+}
+.sub-card {
+  margin: 20px;
+}

@@ -1,0 +1,13 @@
+.skills-item-container {
+  list-style-type: none;
+  width: 25%;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+.skills-container {
+  display: flex;
+}
+.skill-image {
+  width: 40px;
+  margin-right: 20px;
+}
