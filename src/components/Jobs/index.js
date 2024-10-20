@@ -4,9 +4,49 @@ import {FaSearch} from 'react-icons/fa'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import Header from '../Header'
-import './index.css'
 import JobCard from '../JobCard'
 import FilterGroup from '../FilterGroup'
+
+import './index.css'
+
+// These are the lists used in the application. You can move them to any component needed.
+const employmentTypesList = [
+  {
+    label: 'Full Time',
+    employmentTypeId: 'FULLTIME',
+  },
+  {
+    label: 'Part Time',
+    employmentTypeId: 'PARTTIME',
+  },
+  {
+    label: 'Freelance',
+    employmentTypeId: 'FREELANCE',
+  },
+  {
+    label: 'Internship',
+    employmentTypeId: 'INTERNSHIP',
+  },
+]
+
+const salaryRangesList = [
+  {
+    salaryRangeId: '1000000',
+    label: '10 LPA and above',
+  },
+  {
+    salaryRangeId: '2000000',
+    label: '20 LPA and above',
+  },
+  {
+    salaryRangeId: '3000000',
+    label: '30 LPA and above',
+  },
+  {
+    salaryRangeId: '4000000',
+    label: '40 LPA and above',
+  },
+]
 
 const apiStatusConstants = {
   initial: 'INITIAL',
@@ -16,7 +56,13 @@ const apiStatusConstants = {
 }
 
 class Jobs extends Component {
-  state = {apiStatus: apiStatusConstants, searchInput: '', jobsList: []}
+  state = {
+    apiStatus: apiStatusConstants,
+    searchInput: '',
+    jobsList: [],
+    minimumSalary: 0,
+    employeeType: [],
+  }
 
   componentDidMount() {
     this.getJobs()
@@ -27,7 +73,11 @@ class Jobs extends Component {
       apiStatus: apiStatusConstants.inProgress,
     })
     const jwtToken = Cookies.get('jwt_token')
-    const jobsApiUrl = 'https://apis.ccbp.in/jobs'
+
+    const {searchInput, minimumSalary, employeeType} = this.state
+    console.log(employeeType.join())
+
+    const jobsApiUrl = `https://apis.ccbp.in/jobs?employment_type=${employeeType.join()}&minimum_package=${minimumSalary}&search=${searchInput}`
     const options = {
       method: 'GET',
       headers: {
@@ -60,6 +110,27 @@ class Jobs extends Component {
 
   onClickedRetryButton = () => {
     this.getJobs()
+  }
+
+  onEnterSearchInput = event => {
+    if (event.key === 'Enter') {
+      this.getJobs()
+    }
+  }
+
+  onChangeSearchInput = event => {
+    this.setState({searchInput: event.target.value})
+  }
+
+  changeSalary = salary => {
+    this.setState({minimumSalary: salary}, this.getJobs)
+  }
+
+  changeEmployeeList = type => {
+    this.setState(
+      prev => ({employeeType: [...prev.employeeType, type]}),
+      this.getJobs,
+    )
   }
 
   renderJobsContainer = () => {
@@ -123,13 +194,20 @@ class Jobs extends Component {
       <>
         <Header />
         <div className="jobs-section">
-          <FilterGroup />
+          <FilterGroup
+            employmentTypesList={employmentTypesList}
+            changeEmployeeList={this.changeEmployeeList}
+            salaryRangesList={salaryRangesList}
+            changeSalary={this.changeSalary}
+          />
           <div className="jobs-container">
             <div className="search-container">
               <input
                 type="search"
                 placeholder="Search"
                 className="search-input"
+                onChange={this.onChangeSearchInput}
+                onKeyDown={this.onEnterSearchInput}
                 value={searchInput}
               />
               <FaSearch className="search-icon" />
