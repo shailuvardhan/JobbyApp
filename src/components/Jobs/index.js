@@ -122,15 +122,28 @@ class Jobs extends Component {
     this.setState({searchInput: event.target.value})
   }
 
+  onClickedSearchButton = () => {
+    this.getJobs()
+  }
+
   changeSalary = salary => {
     this.setState({minimumSalary: salary}, this.getJobs)
   }
 
   changeEmployeeList = type => {
-    this.setState(
-      prev => ({employeeType: [...prev.employeeType, type]}),
-      this.getJobs,
-    )
+    const {value, checked} = type
+    const {employeeType} = this.state
+    if (checked) {
+      this.setState(
+        prevState => ({
+          employeeType: [...prevState.employeeType, value],
+        }),
+        this.getJobs,
+      )
+    } else {
+      const filteredList = employeeType.filter(item => item !== value)
+      this.setState({employeeType: filteredList})
+    }
   }
 
   renderJobsContainer = () => {
@@ -210,7 +223,10 @@ class Jobs extends Component {
                 onKeyDown={this.onEnterSearchInput}
                 value={searchInput}
               />
-              <FaSearch className="search-icon" />
+              <FaSearch
+                className="search-icon"
+                onClick={this.onClickedSearchButton}
+              />
             </div>
             {this.renderJobs()}
           </div>

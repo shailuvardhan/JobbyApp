@@ -12,7 +12,7 @@ const FilterGroup = props => {
           {employmentTypesList.map(eachEmployeeType => {
             const {changeEmployeeList} = props
             const onSelectEmployeeType = event => {
-              changeEmployeeList(event.target.value)
+              changeEmployeeList(event.target)
             }
             return (
               <li
