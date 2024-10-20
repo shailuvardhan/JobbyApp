@@ -6,6 +6,7 @@ import Loader from 'react-loader-spinner'
 import Header from '../Header'
 import './index.css'
 import JobCard from '../JobCard'
+import FilterGroup from '../FilterGroup'
 
 const apiStatusConstants = {
   initial: 'INITIAL',
@@ -122,9 +123,7 @@ class Jobs extends Component {
       <>
         <Header />
         <div className="jobs-section">
-          <div className="filter-container">
-            <h1>Filter</h1>
-          </div>
+          <FilterGroup />
           <div className="jobs-container">
             <div className="search-container">
               <input
