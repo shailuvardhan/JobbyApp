@@ -142,7 +142,7 @@ class Jobs extends Component {
       )
     } else {
       const filteredList = employeeType.filter(item => item !== value)
-      this.setState({employeeType: filteredList})
+      this.setState({employeeType: filteredList}, this.getJobs)
     }
   }
 

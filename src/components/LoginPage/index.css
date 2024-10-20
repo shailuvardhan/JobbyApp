@@ -8,17 +8,22 @@
 }
 .login-card {
   width: 40%;
-  height: 60%;
+  height: 70%;
   background-color: #272727;
   padding: 20px;
   border-radius: 9px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   color: #ffffff;
 }
 .login-logo-title-container {
   text-align: center;
+  width: 80%;
   margin: 20px;
+}
+.login-logo-img {
+  width: 60%;
 }
 .form-container {
   display: flex;
@@ -42,8 +47,8 @@
 }
 .login-btn {
   width: 100%;
-  margin-top: 20px;
-  margin-bottom: 2px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   height: 35px;
   font-size: 16px;
   border-radius: 7px;
